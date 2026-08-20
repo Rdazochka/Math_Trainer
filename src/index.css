@@ -1,0 +1,815 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "IBM Plex Sans", sans-serif;
+  color: #1d2939;
+
+  background-color: #f7f9f7;
+
+  background-image:
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(183, 225, 197, 0.35),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 100% 60%,
+      rgba(215, 236, 194, 0.3),
+      transparent 22%
+    ),
+    linear-gradient(rgba(148, 163, 184, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
+
+  background-size:
+    auto,
+    auto,
+    24px 24px,
+    24px 24px;
+
+  overflow: hidden;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+}
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.card {
+  width: min(1240px, 100%);
+  height: min(920px, calc(100vh - 80px));
+
+  display: flex;
+  flex-direction: column;
+
+  background: rgba(255, 255, 255, 0.86);
+
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 25px 70px rgba(15, 23, 42, 0.1),
+    0 6px 20px rgba(15, 23, 42, 0.04);
+
+  backdrop-filter: blur(18px);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+  min-height: 142px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding: 28px 36px;
+
+  border-bottom: 1px solid #e7edf0;
+}
+
+/* Пройти [10] завдань */
+
+.header > div {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  color: #1f2937;
+
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.header select {
+  width: 124px;
+  height: 64px;
+
+  padding: 0 20px;
+
+  color: #1f2937;
+
+  font-size: 22px;
+  font-weight: 600;
+
+  background: #ffffff;
+
+  border: 1px solid #d8e0e5;
+  border-radius: 14px;
+
+  outline: none;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.header select:focus {
+  border-color: #3fa460;
+
+  box-shadow: 0 0 0 4px rgba(63, 164, 96, 0.1);
+}
+
+/* =========================
+   ULTIMATE
+========================= */
+
+.ultimate {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 6px;
+
+  position: relative;
+
+  padding-left: 44px;
+
+  color: #1f2937;
+
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.ultimate::after {
+  content: "Автоперехід без кнопки «Далі»";
+
+  color: #7b8794;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+.ultimate input {
+  position: absolute;
+
+  top: 3px;
+  left: 0;
+
+  width: 28px;
+  height: 28px;
+
+  accent-color: #38a65b;
+
+  cursor: pointer;
+}
+
+/* =========================
+   START BUTTON
+========================= */
+
+.start-button,
+.primary-button {
+  min-width: 230px;
+  height: 82px;
+
+  padding: 0 35px;
+
+  color: white;
+
+  font-size: 24px;
+  font-weight: 600;
+
+  background: linear-gradient(135deg, #45ad67, #2f934f);
+
+  border: none;
+  border-radius: 18px;
+
+  box-shadow: 0 12px 28px rgba(49, 151, 81, 0.2);
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.start-button:hover:not(:disabled),
+.primary-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 16px 35px rgba(49, 151, 81, 0.3);
+}
+
+.start-button:active,
+.primary-button:active {
+  transform: translateY(0);
+}
+
+.start-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.welcome {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+
+  text-align: center;
+}
+
+/* =========================
+   MATH SYMBOLS
+========================= */
+
+.math-symbols {
+  position: relative;
+
+  width: 310px;
+  height: 250px;
+
+  margin-bottom: 20px;
+}
+
+.math-symbol {
+  position: absolute;
+
+  width: 92px;
+  height: 92px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  font-size: 52px;
+  font-weight: 600;
+
+  border-radius: 20px;
+
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.14);
+}
+
+/* + */
+
+.plus {
+  top: 5px;
+  left: 40px;
+
+  background: #3f9f5e;
+
+  transform: rotate(-8deg);
+}
+
+/* × */
+
+.multiply {
+  top: 20px;
+  right: 35px;
+
+  background: #f0b429;
+
+  transform: rotate(8deg);
+}
+
+/* − */
+
+.minus {
+  bottom: 25px;
+  left: 15px;
+
+  background: #6659b8;
+
+  transform: rotate(-7deg);
+}
+
+/* = */
+
+.equal {
+  right: 25px;
+  bottom: 0;
+
+  color: #3f9f5e;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  transform: rotate(7deg);
+}
+
+/* =========================
+   WELCOME TEXT
+========================= */
+
+.welcome h1 {
+  margin: 0 0 18px;
+
+  color: #243244;
+
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 700;
+
+  letter-spacing: -2px;
+}
+
+.welcome p {
+  margin: 0;
+
+  color: #748092;
+
+  font-size: 22px;
+}
+
+.welcome p::after {
+  content: "";
+
+  display: block;
+
+  width: 62px;
+  height: 3px;
+
+  margin: 28px auto 0;
+
+  background: #3f9f5e;
+
+  border-radius: 10px;
+}
+
+/* =========================
+   GREEN LINE
+========================= */
+
+.welcome p::after {
+  content: "";
+
+  display: block;
+
+  width: 68px;
+  height: 3px;
+
+  margin: 28px auto 0;
+
+  background: #38a65b;
+
+  border-radius: 10px;
+}
+
+/* =========================
+   QUIZ TOP
+========================= */
+
+.quiz-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 30px 45px 0;
+
+  color: #718096;
+
+  font-size: 17px;
+}
+
+.quiz-top strong {
+  padding: 12px 18px;
+
+  color: #2d3748;
+
+  background: #f2f7f3;
+
+  border-radius: 12px;
+}
+
+/* =========================
+   TASK
+========================= */
+
+.task {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 35px 30px 25px;
+}
+
+.task h2 {
+  margin: 0 0 20px;
+
+  color: #778391;
+
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.question {
+  margin-bottom: 35px;
+
+  color: #17212d;
+
+  font-size: clamp(55px, 7vw, 82px);
+  font-weight: 700;
+}
+
+/* =========================
+   ANSWERS
+========================= */
+
+.answers {
+  width: min(560px, 100%);
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 16px;
+}
+
+.answer {
+  height: 72px;
+
+  color: #263241;
+
+  font-size: 23px;
+  font-weight: 600;
+
+  background: white;
+
+  border: 1px solid #dbe3e8;
+  border-radius: 16px;
+
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.answer:hover:not(:disabled) {
+  border-color: #3fa460;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+/* =========================
+   ANSWER RESULT
+========================= */
+
+.answer-result {
+  min-height: 105px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding-top: 20px;
+}
+
+.feedback {
+  min-height: 25px;
+
+  margin: 0 0 15px;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.correct-text {
+  color: #29924a;
+}
+
+.wrong-text {
+  color: #d24c4c;
+}
+
+/* =========================
+   NEXT BUTTON
+========================= */
+
+.next-button {
+  width: 120px;
+  height: 48px;
+
+  margin: 0;
+
+  color: white;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  background: #243244;
+
+  border: none;
+  border-radius: 12px;
+
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.next-button:hover {
+  background: #17212d;
+
+  transform: translateY(-2px);
+}
+/* =========================
+   STATS
+========================= */
+
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 24px 45px;
+
+  color: #718096;
+
+  font-size: 16px;
+
+  background: rgba(248, 251, 249, 0.8);
+
+  border-top: 1px solid #e8eef0;
+}
+
+.stats strong {
+  color: #263241;
+}
+
+/* =========================
+   RESULT
+========================= */
+
+.result {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 60px 30px;
+
+  text-align: center;
+}
+
+.result h1 {
+  margin: 0 0 30px;
+
+  color: #182433;
+
+  font-size: 48px;
+}
+
+.result-score {
+  color: #38a65b;
+
+  font-size: 76px;
+  font-weight: 700;
+}
+
+.percentage {
+  color: #667382;
+
+  font-size: 22px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 850px) {
+  body {
+    overflow: auto;
+  }
+
+  .page {
+    height: auto;
+    min-height: 100vh;
+
+    padding: 16px;
+  }
+
+  .card {
+    height: auto;
+    min-height: calc(100vh - 32px);
+  }
+
+  .header {
+    flex-wrap: wrap;
+
+    justify-content: center;
+  }
+
+  .ultimate {
+    order: 3;
+  }
+
+  .start-button {
+    min-width: 180px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 20px;
+  }
+
+  .header > div {
+    font-size: 16px;
+  }
+
+  .header select {
+    width: 80px;
+    height: 50px;
+
+    font-size: 18px;
+  }
+
+  .ultimate {
+    font-size: 18px;
+  }
+
+  .ultimate::after {
+    font-size: 13px;
+  }
+
+  .welcome {
+    padding: 50px 20px;
+  }
+
+  .math-symbols {
+    transform: scale(0.8);
+
+    margin-bottom: 0;
+  }
+
+  .welcome h1 {
+    font-size: 42px;
+  }
+
+  .answers {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   DECORATION
+========================= */
+
+.welcome {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Великий зелений круг на фоні */
+
+.welcome::before {
+  content: "";
+
+  position: absolute;
+
+  width: 380px;
+  height: 380px;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -58%);
+
+  border-radius: 50%;
+
+  background: rgba(116, 201, 137, 0.22);
+
+  filter: blur(2px);
+
+  z-index: 0;
+}
+
+/* Світіння навколо круга */
+
+.welcome::after {
+  content: "";
+
+  position: absolute;
+
+  width: 520px;
+  height: 520px;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -58%);
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(135, 214, 154, 0.16) 0%,
+    rgba(135, 214, 154, 0.08) 35%,
+    transparent 70%
+  );
+
+  z-index: 0;
+}
+
+/* Щоб контент був над кругом */
+
+.math-symbols,
+.welcome h1,
+.welcome p {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   STARS
+========================= */
+
+.star {
+  position: absolute;
+
+  z-index: 2;
+
+  color: #f3b52a;
+
+  line-height: 1;
+
+  text-shadow: 0 4px 10px rgba(243, 181, 42, 0.25);
+}
+
+.star-1 {
+  top: 18%;
+  left: 27%;
+
+  font-size: 22px;
+}
+
+.star-2 {
+  top: 26%;
+  right: 27%;
+
+  font-size: 30px;
+}
+
+.star-3 {
+  top: 48%;
+  left: 22%;
+
+  font-size: 16px;
+}
+
+.star-4 {
+  top: 52%;
+  right: 22%;
+
+  font-size: 20px;
+}
