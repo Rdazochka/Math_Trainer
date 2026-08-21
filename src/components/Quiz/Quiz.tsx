@@ -1,4 +1,4 @@
-import type { Task } from "../../data/tasks";
+import type { Task } from "../../types/task";
 import TaskComponent from "../Task/Task";
 
 interface QuizProps {
@@ -7,10 +7,10 @@ interface QuizProps {
   totalTasks: number;
   time: number;
   correctAnswers: number;
-  selectedAnswer: number | null;
+  selectedAnswer: string | number | null;
   isAnswerChecked: boolean;
   isUltimate: boolean;
-  onAnswer: (answer: number) => void;
+  onAnswer: (answer: string | number) => void;
   onNext: () => void;
 }
 
@@ -53,10 +53,7 @@ function Quiz({
         <span>
           Точність:{" "}
           <strong>
-            {taskNumber
-              ? Math.round((correctAnswers / taskNumber) * 100)
-              : 0}
-            %
+            {taskNumber ? Math.round((correctAnswers / taskNumber) * 100) : 0}%
           </strong>
         </span>
       </footer>

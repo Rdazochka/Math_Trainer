@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { tasks } from "./data/tasks";
+import type { Topic } from "./types/task";
+
 import Header from "./components/Header/Header";
 import Quiz from "./components/Quiz/Quiz";
 import Result from "./components/Result/Result";
@@ -12,11 +14,27 @@ function App() {
   const [isStarted, setIsStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [isUltimate, setIsUltimate] = useState(false);
+
   const [taskCount, setTaskCount] = useState(10);
 
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [selectedTopic, setSelectedTopic] = useState<Topic | "all">("all");
+
+  const [selectedAnswer, setSelectedAnswer] = useState<string | number | null>(
+    null,
+  );
+
   const [isAnswerChecked, setIsAnswerChecked] = useState(false);
 
+  // Фільтруємо завдання за вибраною темою
+  const filteredTasks =
+    selectedTopic === "all"
+      ? tasks
+      : tasks.filter((task) => task.topic === selectedTopic);
+
+  // Беремо потрібну кількість завдань
+  const quizTasks = filteredTasks.slice(0, taskCount);
+
+  // Таймер
   useEffect(() => {
     if (!isStarted || isFinished) return;
 
@@ -27,6 +45,7 @@ function App() {
     return () => clearInterval(timer);
   }, [isStarted, isFinished]);
 
+  // Старт тесту
   const startQuiz = () => {
     setCurrentTask(0);
     setCorrectAnswers(0);
@@ -37,23 +56,30 @@ function App() {
     setIsStarted(true);
   };
 
-  const checkAnswer = (answer: number) => {
+  // Перевірка відповіді
+  const checkAnswer = (answer: string | number) => {
     if (isAnswerChecked) return;
 
     setSelectedAnswer(answer);
     setIsAnswerChecked(true);
 
     const isCorrect = answer === quizTasks[currentTask].answer;
+
     if (isCorrect) {
       setCorrectAnswers((prev) => prev + 1);
     }
 
+    // Якщо це останнє завдання
     if (currentTask === quizTasks.length - 1) {
-      setIsFinished(true);
-      setIsStarted(false);
+      setTimeout(() => {
+        setIsFinished(true);
+        setIsStarted(false);
+      }, 600);
+
       return;
     }
 
+    // Ultimate режим
     if (isUltimate) {
       setTimeout(() => {
         goToNextTask();
@@ -61,8 +87,9 @@ function App() {
     }
   };
 
+  // Наступне завдання
   const goToNextTask = () => {
-    if (currentTask === tasks.length - 1) {
+    if (currentTask === quizTasks.length - 1) {
       setIsFinished(true);
       setIsStarted(false);
       return;
@@ -73,21 +100,28 @@ function App() {
     setIsAnswerChecked(false);
   };
 
+  // Почати заново
   const restartQuiz = () => {
-    startQuiz();
+    setCurrentTask(0);
+    setCorrectAnswers(0);
+    setTime(0);
+    setSelectedAnswer(null);
+    setIsAnswerChecked(false);
+    setIsFinished(false);
+    setIsStarted(true);
   };
-
-  const quizTasks = tasks.slice(0, taskCount);
 
   return (
     <main className="page">
       <section className="card">
         <Header
           taskCount={taskCount}
+          selectedTopic={selectedTopic}
           isStarted={isStarted}
           isUltimate={isUltimate}
           onStart={startQuiz}
           onTaskCountChange={setTaskCount}
+          onTopicChange={setSelectedTopic}
           onUltimateChange={setIsUltimate}
         />
 
@@ -110,7 +144,7 @@ function App() {
           </div>
         )}
 
-        {isStarted && !isFinished && (
+        {isStarted && !isFinished && quizTasks.length > 0 && (
           <Quiz
             task={quizTasks[currentTask]}
             taskNumber={currentTask + 1}

@@ -1,11 +1,11 @@
-import type { Task } from "../../data/tasks";
+import type { Task } from "../../types/task";
 
 interface TaskProps {
   task: Task;
-  selectedAnswer: number | null;
+  selectedAnswer: string | number | null;
   isAnswerChecked: boolean;
   isUltimate: boolean;
-  onAnswer: (answer: number) => void;
+  onAnswer: (answer: string | number) => void;
   onNext: () => void;
 }
 
@@ -52,15 +52,21 @@ function TaskComponent({
 
       <div className="answer-result">
         {isAnswerChecked && (
-          <p
-            className={
-              isCorrect ? "feedback correct-text" : "feedback wrong-text"
-            }
-          >
-            {isCorrect
-              ? "✓ Правильно!"
-              : `✕ Неправильно. Правильна відповідь: ${task.answer}`}
-          </p>
+          <>
+            <p
+              className={
+                isCorrect ? "feedback correct-text" : "feedback wrong-text"
+              }
+            >
+              {isCorrect
+                ? "✓ Правильно!"
+                : `✕ Неправильно. Правильна відповідь: ${task.answer}`}
+            </p>
+
+            <div className="explanation">
+              <strong>Пояснення:</strong> {task.explanation}
+            </div>
+          </>
         )}
 
         {!isUltimate && (

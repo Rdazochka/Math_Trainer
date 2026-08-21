@@ -98,20 +98,44 @@ button {
 .header {
   min-height: 142px;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(280px, 1.4fr) auto minmax(270px, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
 
-  gap: 30px;
+  gap: 28px;
 
   padding: 28px 36px;
 
   border-bottom: 1px solid #e7edf0;
 }
 
-/* Пройти [10] завдань */
+/* ВИБІР ТЕМИ */
 
-.header > div {
+.topic-control {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  min-width: 0;
+
+  color: #1f2937;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.topic-control span {
+  white-space: nowrap;
+}
+
+.topic-control select {
+  flex: 1;
+  min-width: 170px;
+}
+
+/* КІЛЬКІСТЬ ЗАВДАНЬ */
+
+.task-count {
   display: flex;
   align-items: center;
 
@@ -119,19 +143,23 @@ button {
 
   color: #1f2937;
 
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
+
+  white-space: nowrap;
 }
 
+/* SELECT */
+
 .header select {
-  width: 124px;
+  width: 110px;
   height: 64px;
 
   padding: 0 20px;
 
   color: #1f2937;
 
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
 
   background: #ffffff;
@@ -154,50 +182,53 @@ button {
   box-shadow: 0 0 0 4px rgba(63, 164, 96, 0.1);
 }
 
-/* =========================
-   ULTIMATE
-========================= */
+/* ВИБІР ТЕМИ — ШИРШИЙ */
+
+.topic-control select {
+  width: 100%;
+}
 
 .ultimate {
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
 
-  gap: 6px;
-
-  position: relative;
-
-  padding-left: 44px;
+  gap: 12px;
 
   color: #1f2937;
 
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.ultimate::after {
-  content: "Автоперехід без кнопки «Далі»";
-
-  color: #7b8794;
-
-  font-size: 16px;
-  font-weight: 400;
-
-  white-space: nowrap;
+  cursor: pointer;
 }
 
 .ultimate input {
-  position: absolute;
-
-  top: 3px;
-  left: 0;
-
   width: 28px;
   height: 28px;
+
+  margin-top: 3px;
 
   accent-color: #38a65b;
 
   cursor: pointer;
+}
+
+.ultimate div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.ultimate strong {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.ultimate span {
+  color: #7b8794;
+
+  font-size: 15px;
+  font-weight: 400;
+
+  white-space: nowrap;
 }
 
 /* =========================
@@ -447,10 +478,8 @@ button {
 
 .question {
   margin-bottom: 35px;
-
   color: #17212d;
-
-  font-size: clamp(55px, 7vw, 82px);
+  font-size: clamp(32px, 4vw, 48px);
   font-weight: 700;
 }
 
@@ -520,6 +549,10 @@ button {
   font-weight: 600;
 }
 
+.explanation {
+  font-size: 17px;
+}
+
 .correct-text {
   color: #29924a;
 }
@@ -535,16 +568,12 @@ button {
 .next-button {
   width: 120px;
   height: 48px;
-
-  margin: 0;
+  margin-top: 50px;
 
   color: white;
-
   font-size: 17px;
   font-weight: 600;
-
   background: #243244;
-
   border: none;
   border-radius: 12px;
 
