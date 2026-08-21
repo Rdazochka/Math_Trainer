@@ -1,4 +1,4 @@
-# Math Trainer — Level 2
+# Math Trainer
 
 Спрощена структура для навчання React.
 
@@ -6,12 +6,12 @@
 
 src/
 ├── components/
-│   ├── Header/
-│   ├── Quiz/
-│   ├── Task/
-│   └── Result/
+│ ├── Header/
+│ ├── Quiz/
+│ ├── Task/
+│ └── Result/
 ├── data/
-│   └── tasks.ts
+│ └── tasks.ts
 ├── App.tsx
 ├── main.tsx
 └── index.css
@@ -32,4 +32,3 @@ src/
 - повторне проходження
 
 Задачі поки зберігаються у `src/data/tasks.ts`.
-Генерацію випадкових задач додамо пізніше.
